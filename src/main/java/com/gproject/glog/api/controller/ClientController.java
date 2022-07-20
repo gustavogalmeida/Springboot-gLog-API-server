@@ -17,8 +17,8 @@ public class ClientController {
 		Client client1 = new Client();
 		client1.setId(1L);
 		client1.setEmail("gustavogalvesalmeida@gmail.com");
-		client1.setNome("Gustavo Almeida");
-		client1.setTelefone("3499999999");
+		client1.setName("Gustavo Almeida");
+		client1.setPhoneNumber("3499999999");
 		
 		return ResponseEntity.status(HttpStatus.OK).body(client1);
 	}

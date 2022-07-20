@@ -8,8 +8,8 @@ import lombok.Setter;
 public class Client {
 	
 	private Long id;
-	private String nome;
+	private String name;
 	private String email;
-	private String telefone;
+	private String phoneNumber;
 		
 }
