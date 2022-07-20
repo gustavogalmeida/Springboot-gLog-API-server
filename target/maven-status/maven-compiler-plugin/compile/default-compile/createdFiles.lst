@@ -1,1 +1,3 @@
 com\gproject\glog\GlogApiApplication.class
+com\gproject\glog\domain\model\Client.class
+com\gproject\glog\api\controller\ClientController.class
