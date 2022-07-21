@@ -21,7 +21,7 @@ public class ClientController {
 		
 		var client2 = new Client();
 		client2.setId(2L);
-		client2.setName("Pedro");
+		client2.setName("Pedro1");
 		client2.setEmail("pedro@gmail.com");
 		client2.setPhoneNumber("34 98888 8888");
 		
