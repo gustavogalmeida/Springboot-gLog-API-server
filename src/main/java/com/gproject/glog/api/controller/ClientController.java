@@ -1,6 +1,5 @@
 package com.gproject.glog.api.controller;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -17,9 +16,9 @@ public class ClientController {
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-	@GetMapping(value = "/clients")
+	@GetMapping("/clients")
 	public List<Client> list() {
-		return  entityManager.createQuery("from client", Client.class).getResultList();
+		return entityManager.createQuery("from Client", Client.class).getResultList();
 	}
 	
 }
