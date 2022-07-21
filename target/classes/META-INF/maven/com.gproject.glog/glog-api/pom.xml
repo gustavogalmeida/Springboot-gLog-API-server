@@ -49,7 +49,7 @@
 			<artifactId>jackson-dataformat-xml</artifactId> 
 		</dependency>
 
-		<dependency>
+		<dependency> <!-- restart spring after save changes  -->
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
@@ -63,6 +63,16 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
+		
+		<dependency> <!--  for spring version after 2.7 -->
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-mysql</artifactId>
 		</dependency>
 		
 	</dependencies>
