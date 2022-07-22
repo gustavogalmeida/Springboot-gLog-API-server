@@ -9,6 +9,8 @@ import com.gproject.glog.domain.model.Client;
 
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Long>{
+	
 	List<Client> findByName(String name);
 	List<Client> findByNameContaining(String name);
+	
 }
