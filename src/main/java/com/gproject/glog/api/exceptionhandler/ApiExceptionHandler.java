@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.format.datetime.standard.DateTimeContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +15,11 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import com.gproject.glog.domain.exception.BusinessException;
 
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
@@ -44,6 +48,19 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
 		error.setFields(fields);
 		
 		return handleExceptionInternal(ex, error, headers, status, request);
+	}
+	
+	@ExceptionHandler(BusinessException.class)
+	public ResponseEntity<Object> handleBusiness(BusinessException ex, WebRequest webRequest){
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		
+		ExceptionObject error = new ExceptionObject();
+		
+		error.setStatus(status.value());
+		error.setDateTime(LocalDateTime.now());
+		error.setTitle(ex.getMessage());
+		
+		return handleExceptionInternal(ex, error, new HttpHeaders(), status, webRequest);
 	}
 	
 }
