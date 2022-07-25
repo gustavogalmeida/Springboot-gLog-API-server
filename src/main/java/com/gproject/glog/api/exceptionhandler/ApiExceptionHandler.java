@@ -1,5 +1,7 @@
 package com.gproject.glog.api.exceptionhandler;
 
+import java.time.LocalDateTime;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +17,13 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 		
-		return handleExceptionInternal(ex, "Valor inválido", headers, status, request);
+		ExceptionObject error = new ExceptionObject();
+		
+		error.setTitle("One or more fields is invalid.");
+		error.setDateTime(LocalDateTime.now());
+		error.setStatus(status.value());
+		
+		return handleExceptionInternal(ex, error, headers, status, request);
 	}
 	
 }
