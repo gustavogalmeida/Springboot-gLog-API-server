@@ -19,24 +19,26 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.gproject.glog.domain.model.Client;
 import com.gproject.glog.domain.repository.ClientRepository;
+import com.gproject.glog.domain.services.ClientService;
 
 @RequestMapping("/clients")
 @RestController
 public class ClientController {
 	
 	@Autowired
-	private ClientRepository clientRepository;
+	private ClientService clientService;
 	
 	@GetMapping
 	public List<Client> list() {
-		return clientRepository.findAll();
+		return clientService.listClient();
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Client> find(@PathVariable("id") Long id) {
+	public ResponseEntity<Client> find(@PathVariable("id") Long id) {		
 		
-		return clientRepository.findById(id).map(ResponseEntity::ok)
-				.orElse(ResponseEntity.notFound().build());
+		Client client = clientService.findClient(id);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(client);
 		
 	}
 	
@@ -44,28 +46,26 @@ public class ClientController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public Client create(@Valid @RequestBody Client client) {
 		
-		return clientRepository.save(client);
+		return clientService.saveClient(client);
+		
 	}
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<Client> update(@Valid @RequestBody Client client, @PathVariable("id") Long id) {
-		if (!clientRepository.existsById(id)) {
-			return ResponseEntity.notFound().build();
-		}
-		
+			
 		client.setId(id);
 		
-		client = clientRepository.save(client);
+		client = clientService.saveClient(client);
 		
 		return ResponseEntity.ok(client);
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Client> delete (@PathVariable Long id){
-		if (!clientRepository.existsById(id)) {
-			return ResponseEntity.notFound().build();
-		}
-		clientRepository.deleteById(id);		
+		
+		clientService.deleteClient(id);
+		
 		return ResponseEntity.noContent().build();
+		
 	}
 }
