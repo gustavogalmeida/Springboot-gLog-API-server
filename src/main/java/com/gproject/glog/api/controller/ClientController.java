@@ -2,6 +2,8 @@ package com.gproject.glog.api.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,13 +42,13 @@ public class ClientController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Client create(@RequestBody Client client) {
+	public Client create(@Valid @RequestBody Client client) {
 		
 		return clientRepository.save(client);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Client> update(@RequestBody Client client, @PathVariable("id") Long id) {
+	public ResponseEntity<Client> update(@Valid @RequestBody Client client, @PathVariable("id") Long id) {
 		if (!clientRepository.existsById(id)) {
 			return ResponseEntity.notFound().build();
 		}
