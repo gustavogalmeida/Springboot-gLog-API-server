@@ -40,6 +40,6 @@ public class Delivery {
 	
 	private LocalDateTime dateOrder;
 	
-	private LocalDateTime finishing;
+	private LocalDateTime dateFinishing;
 	
 }
